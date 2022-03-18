@@ -1,22 +1,8 @@
 import React from 'react'
-
-import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
-import HomeStack from './homeStack'
-import CharactersStack from './charactersStack'
-
-const BottomTab = createBottomTabNavigator()
+import { Text } from 'react-native'
 
 const Routes = () => {
-  return (
-    <NavigationContainer>
-      <BottomTab.Navigator>
-        <BottomTab.Screen name='HomeStack' component={HomeStack} />
-        <BottomTab.Screen name='CharactersStack' component={CharactersStack} />
-      </BottomTab.Navigator>
-    </NavigationContainer>
-  )
+  return <Text>Test</Text>
 }
 
 export default Routes

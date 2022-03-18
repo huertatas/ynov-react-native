@@ -1,5 +1,5 @@
 import React from 'react'
-import Routes from './src/config/routes/loginStack'
+import Routes from './src/config/routes/index'
 import { View } from 'react-native'
 
 const App = () => {
