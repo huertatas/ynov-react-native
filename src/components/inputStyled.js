@@ -2,10 +2,10 @@ import { View } from 'react-native'
 import React from 'react'
 import styled from 'styled-components'
 
-export default function InputStyled() {
+export default function InputStyled({ placeholder }) {
   return (
     <ContainsInput>
-      <InputStld placeholder='useless placeholder' />
+      <InputStld placeholder={placeholder} />
     </ContainsInput>
   )
 }
