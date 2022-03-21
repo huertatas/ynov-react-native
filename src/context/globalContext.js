@@ -18,13 +18,15 @@ const GlobalProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    handleCheckAsyncStorage();
+    handleCheckAsyncStorage()
   }, [])
 
   return (
     <GlobalContext.Provider
       value={{
-        apiKey: apiKey
+        apiKey: apiKey,
+        navMovieDetails: '',
+        idMovie: ''
       }}
     >
       {children}
