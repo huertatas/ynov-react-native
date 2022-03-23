@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import { TouchableHighlight } from 'react-native'
 import React, { useContext } from 'react'
 import GlobalProvider from '../../context/globalContext'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export default function ListCategory({ arrFilm }) {
+export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
   const globalCtx = useContext(GlobalProvider)
 
   const handleNavigateToMovieDetails = idMovie => {
@@ -11,22 +12,60 @@ export default function ListCategory({ arrFilm }) {
     globalCtx.navMovieDetails.navigate('MovieDetails')
   }
 
+  const handleDeleteMovieFromFavorite = async (id, category) => {
+    let asyncKey = ''
+    if (category === 'FILM FAVORIS') {
+      asyncKey = 'favorite'
+    } else {
+      asyncKey = 'watchlist'
+    }
+
+    console.log('passe ici')
+    try {
+      let favorite = await AsyncStorage.getItem(asyncKey)
+
+      if (favorite === null) {
+        return
+      }
+
+      favorite = JSON.parse(favorite)
+
+      let result = favorite.filter(favoriteItem => favoriteItem.id !== id)
+
+      result = JSON.stringify(result)
+
+      await AsyncStorage.setItem(asyncKey, result)
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
   return (
     <FlatCtg
       horizontal
       data={arrFilm}
       renderItem={({ item }) => (
-        <TouchableHighlight
-          onPress={() => {
-            handleNavigateToMovieDetails(item.id)
-          }}
-        >
-          <FilmItem
-            source={{
-              uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`
+        <>
+          <TouchableHighlight
+            onPress={() => {
+              handleNavigateToMovieDetails(item.id)
             }}
-          />
-        </TouchableHighlight>
+          >
+            <FilmItem
+              source={{
+                uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`
+              }}
+            />
+          </TouchableHighlight>
+          {deletePossible && (
+            <DeleteButton
+              onPress={() =>
+                handleDeleteMovieFromFavorite.bind(null, item.id, titleCtg)()
+              }
+              title='delete'
+            />
+          )}
+        </>
       )}
       showsHorizontalScrollIndicator={false}
     />
@@ -42,4 +81,12 @@ const FilmItem = styled.Image`
   width: 95px;
   border: 1px solid grey;
   margin: 5px;
+`
+
+const DeleteButton = styled.Button`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 50px;
 `

@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
+import Profil from '../../screens/profil'
 
-export default function ProfilStack() {
+const Stack = createNativeStackNavigator()
+
+export default function MovieStack() {
   return (
-    <View>
-      <Text>profilStack</Text>
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='Movie' component={Profil} />
+    </Stack.Navigator>
   )
 }

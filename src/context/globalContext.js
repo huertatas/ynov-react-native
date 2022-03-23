@@ -9,8 +9,8 @@ const GlobalProvider = ({ children }) => {
   const handleCheckAsyncStorage = async () => {
     try {
       const valueApiKey = await AsyncStorage.getItem('apiKey')
-      if (value !== null) {
-        setApiKey(value)
+      if (valueApiKey !== null) {
+        setApiKey(valueApiKey)
       }
     } catch (error) {
       console.log(error)
@@ -26,7 +26,8 @@ const GlobalProvider = ({ children }) => {
       value={{
         apiKey: apiKey,
         navMovieDetails: '',
-        idMovie: ''
+        idMovie: '',
+        nameUser: ''
       }}
     >
       {children}
