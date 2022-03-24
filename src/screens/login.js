@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Input from '../components/inputStyled'
-import Button from '../components/buttonStyled'
 import GlobalContext from '../context/globalContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useIsFocused } from '@react-navigation/native'
@@ -62,7 +60,7 @@ const Login = ({ navigation }) => {
         onChangeText={text => setUsername(text)}
       />
       <InputLog placeholder='password' onChangeText={text => setMail(text)} />
-      <Button funcButton={handleLogin} />
+      <ButtonLog title='login' onPress={handleLogin} />
     </BackgroundMovieScreen>
   )
 }
@@ -85,5 +83,7 @@ const InputLog = styled.TextInput`
   border-radius: 10px;
   border: solid grey 1px;
 `
+
+const ButtonLog = styled.Button``
 
 export default Login
