@@ -59,7 +59,11 @@ const Login = ({ navigation }) => {
         placeholder='username'
         onChangeText={text => setUsername(text)}
       />
-      <InputLog placeholder='password' onChangeText={text => setMail(text)} />
+      <InputLog
+        secureTextEntry={true}
+        placeholder='password'
+        onChangeText={text => setMail(text)}
+      />
       <ButtonLog title='login' onPress={handleLogin} />
     </BackgroundMovieScreen>
   )
