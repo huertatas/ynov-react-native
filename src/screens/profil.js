@@ -31,15 +31,10 @@ export default function Movie({ navigation }) {
     }
   }
 
-  // useEffect(() => {
-  //   // fetch films
-  //   handleFetchMovies()
-  // }, [])
-
   useFocusEffect(
     React.useCallback(() => {
       handleFetchMovies()
-    }, [])
+    }, [globalCtx])
   )
   return (
     <BackgroundMovieScreen>
@@ -48,8 +43,16 @@ export default function Movie({ navigation }) {
           uri: 'https://a.ltrbxd.com/logos/letterboxd-mac-icon.png'
         }}
       />
-      <CategoryMovieSlide titleCtg='FILM FAVORIS' dataMovies={favoriteMovie} deletePossible={true} />
-      <CategoryMovieSlide titleCtg='WATCHLIST' dataMovies={watchlistMovie} deletePossible={true} />
+      <CategoryMovieSlide
+        titleCtg='FILM FAVORIS'
+        dataMovies={favoriteMovie}
+        deletePossible={true}
+      />
+      <CategoryMovieSlide
+        titleCtg='WATCHLIST'
+        dataMovies={watchlistMovie}
+        deletePossible={true}
+      />
     </BackgroundMovieScreen>
   )
 }

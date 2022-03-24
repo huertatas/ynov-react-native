@@ -39,6 +39,15 @@ export default function MovieDetails() {
         actualArr = JSON.parse(actualArr)
       }
 
+      const findIfAlreadyExist = actualArr.find(
+        itemMovie => itemMovie.id === movieDetailObj.id
+      )
+
+      if (findIfAlreadyExist !== undefined) {
+        console.log('already selectioned')
+        return
+      }
+
       actualArr.push(movieDetailObj)
       actualArr = JSON.stringify(actualArr)
       console.log(actualArr)

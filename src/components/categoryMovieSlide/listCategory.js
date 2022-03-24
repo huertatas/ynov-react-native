@@ -12,7 +12,7 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
     globalCtx.navMovieDetails.navigate('MovieDetails')
   }
 
-  const handleDeleteMovieFromFavorite = async (id, category) => {
+  const handleDeleteMovieFromProfil = async (id, category) => {
     let asyncKey = ''
     if (category === 'FILM FAVORIS') {
       asyncKey = 'favorite'
@@ -20,7 +20,6 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
       asyncKey = 'watchlist'
     }
 
-    console.log('passe ici')
     try {
       let favorite = await AsyncStorage.getItem(asyncKey)
 
@@ -33,6 +32,8 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
       let result = favorite.filter(favoriteItem => favoriteItem.id !== id)
 
       result = JSON.stringify(result)
+
+      globalCtx.handleReloadProfilPage(Date.now())
 
       await AsyncStorage.setItem(asyncKey, result)
     } catch (e) {
@@ -60,7 +61,7 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
           {deletePossible && (
             <DeleteButton
               onPress={() =>
-                handleDeleteMovieFromFavorite.bind(null, item.id, titleCtg)()
+                handleDeleteMovieFromProfil.bind(null, item.id, titleCtg)()
               }
               title='delete'
             />

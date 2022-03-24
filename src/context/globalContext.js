@@ -5,6 +5,7 @@ const GlobalContext = React.createContext()
 
 const GlobalProvider = ({ children }) => {
   const [apiKey, setApiKey] = useState('')
+  const [reloadProfilPage, setReloadProfilPage] = useState('')
 
   const handleCheckAsyncStorage = async () => {
     try {
@@ -17,6 +18,10 @@ const GlobalProvider = ({ children }) => {
     }
   }
 
+  const handleReloadProfilPage = id => {
+    setReloadProfilPage(id)
+  }
+
   useEffect(() => {
     handleCheckAsyncStorage()
   }, [])
@@ -27,7 +32,8 @@ const GlobalProvider = ({ children }) => {
         apiKey: apiKey,
         navMovieDetails: '',
         idMovie: '',
-        nameUser: ''
+        nameUser: '',
+        handleReloadProfilPage
       }}
     >
       {children}
