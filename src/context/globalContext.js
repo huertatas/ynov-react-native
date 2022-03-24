@@ -14,7 +14,10 @@ const GlobalProvider = ({ children }) => {
         setApiKey(valueApiKey)
       }
     } catch (error) {
-      console.log(error)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 
@@ -33,6 +36,7 @@ const GlobalProvider = ({ children }) => {
         navMovieDetails: '',
         idMovie: '',
         nameUser: '',
+        reloadProfilPage,
         handleReloadProfilPage
       }}
     >

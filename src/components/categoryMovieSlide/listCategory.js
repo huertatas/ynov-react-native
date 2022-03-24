@@ -3,6 +3,7 @@ import { TouchableHighlight } from 'react-native'
 import React, { useContext } from 'react'
 import GlobalProvider from '../../context/globalContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { showMessage } from 'react-native-flash-message'
 
 export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
   const globalCtx = useContext(GlobalProvider)
@@ -21,23 +22,33 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
     }
 
     try {
-      let favorite = await AsyncStorage.getItem(asyncKey)
+      let movieList = await AsyncStorage.getItem(asyncKey)
 
-      if (favorite === null) {
+      if (movieList === null) {
+        showMessage({
+          message: 'Une erreur est survenue, veuillez réessayer',
+          type: 'info'
+        })
         return
       }
 
-      favorite = JSON.parse(favorite)
+      movieList = JSON.parse(movieList)
 
-      let result = favorite.filter(favoriteItem => favoriteItem.id !== id)
+      let result = movieList.filter(movieItem => movieItem.id !== id)
 
       result = JSON.stringify(result)
 
-      globalCtx.handleReloadProfilPage(Date.now())
-
+      showMessage({
+        message: 'Élément supprimé de votre liste',
+        type: 'info'
+      })
       await AsyncStorage.setItem(asyncKey, result)
+      globalCtx.handleReloadProfilPage(Math.random())
     } catch (e) {
-      console.log(e.message)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 

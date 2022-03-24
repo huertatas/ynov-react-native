@@ -4,6 +4,7 @@ import Button from '../components/buttonStyled'
 import GlobalContext from '../context/globalContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useIsFocused } from '@react-navigation/native'
+import { showMessage } from 'react-native-flash-message'
 import styled from 'styled-components'
 
 const Login = ({ navigation }) => {
@@ -25,16 +26,26 @@ const Login = ({ navigation }) => {
       await AsyncStorage.setItem('apiKey', '641582111391a97ed15cb4bf2c13ae08')
       globalCtx.apiKey = '641582111391a97ed15cb4bf2c13ae08'
       globalCtx.nameUser = username
+      showMessage({
+        message: 'Connecté',
+        type: 'success'
+      })
       navigation.navigate('Home')
     } catch (error) {
-      console.log(error)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 
   useEffect(() => {
     if (globalCtx.apiKey) {
       // check si connecté ou non en fonction de si oui ou non il possède l'apiKey
-      console.log('go to home ya la key')
+      showMessage({
+        message: 'Vous êtes déjà connecté',
+        type: 'info'
+      })
       navigation.navigate('Home')
     }
   }, [isFocused, globalCtx.apiKey])

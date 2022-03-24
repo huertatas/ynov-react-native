@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import CategoryMovieSlide from '../components/categoryMovieSlide'
 import GlobalContext from '../context/globalContext'
 import axios from 'axios'
+import { showMessage } from 'react-native-flash-message'
 
 export default function Movie({ navigation }) {
   const globalCtx = useContext(GlobalContext)
@@ -38,7 +39,10 @@ export default function Movie({ navigation }) {
       setUpcomingMovieArr(upcomingRatedMovies.data.results)
       setNowMovieArr(nowMovies.data.results)
     } catch (e) {
-      console.log(e)
+      showMessage({
+        message: 'Echec lors de la connexion au réseau',
+        type: 'info'
+      })
     }
   }
 

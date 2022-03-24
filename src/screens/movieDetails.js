@@ -4,6 +4,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import CtaMovieDetails from '../components/ctaMovieDetails'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { showMessage } from 'react-native-flash-message'
 
 export default function MovieDetails() {
   const globalCtx = useContext(GlobalProvider)
@@ -25,7 +26,10 @@ export default function MovieDetails() {
 
       setMovieReviewsArr(movieReviews.data.results)
     } catch (e) {
-      console.log(e.message)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 
@@ -44,16 +48,25 @@ export default function MovieDetails() {
       )
 
       if (findIfAlreadyExist !== undefined) {
-        console.log('already selectioned')
+        showMessage({
+          message: 'Cet élément est déjà présent dans votre liste',
+          type: 'info'
+        })
         return
       }
 
       actualArr.push(movieDetailObj)
       actualArr = JSON.stringify(actualArr)
-      console.log(actualArr)
+      showMessage({
+        message: 'Élément ajouté à votre liste',
+        type: 'success'
+      })
       await AsyncStorage.setItem(key, actualArr)
     } catch (error) {
-      console.log(error)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 

@@ -4,12 +4,15 @@ import styled from 'styled-components'
 import CategoryMovieSlide from '../components/categoryMovieSlide'
 import GlobalContext from '../context/globalContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useFocusEffect } from '@react-navigation/native'
+import { showMessage } from 'react-native-flash-message'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function Movie({ navigation }) {
   const globalCtx = useContext(GlobalContext)
 
   globalCtx.navMovieDetails = navigation
+
+  const isFocused = useIsFocused()
 
   const [favoriteMovie, setFavoriteMovie] = useState([])
   const [watchlistMovie, setWatchlistMovie] = useState([])
@@ -17,6 +20,7 @@ export default function Movie({ navigation }) {
   const handleFetchMovies = async () => {
     try {
       let favorite = await AsyncStorage.getItem('favorite')
+
       let watchlist = await AsyncStorage.getItem('watchlist')
 
       if (favorite !== null) {
@@ -27,15 +31,17 @@ export default function Movie({ navigation }) {
         setWatchlistMovie(JSON.parse(watchlist))
       }
     } catch (e) {
-      console.log(e)
+      showMessage({
+        message: 'Une erreur est survenue, veuillez réessayer',
+        type: 'info'
+      })
     }
   }
 
-  useFocusEffect(
-    React.useCallback(() => {
-      handleFetchMovies()
-    }, [globalCtx])
-  )
+  useEffect(() => {
+    handleFetchMovies()
+  }, [isFocused, globalCtx.reloadProfilPage])
+
   return (
     <BackgroundMovieScreen>
       <LogoLetterBox
