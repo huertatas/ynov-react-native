@@ -14,7 +14,6 @@ const Login = ({ navigation }) => {
   const isFocused = useIsFocused()
 
   const handleLogin = async () => {
-    // mettre l'api key tmdb dans l'async storage puis naviguer vers home
 
     if (!mail && !username) {
       return
@@ -39,7 +38,6 @@ const Login = ({ navigation }) => {
 
   useEffect(() => {
     if (globalCtx.apiKey) {
-      // check si connecté ou non en fonction de si oui ou non il possède l'apiKey
       showMessage({
         message: 'Vous êtes déjà connecté',
         type: 'info'

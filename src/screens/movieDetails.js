@@ -34,7 +34,6 @@ export default function MovieDetails() {
   }
 
   const handleAddToStorage = async key => {
-    // stringify l'array avant de le mettre dans storage
     try {
       let actualArr = await AsyncStorage.getItem(key)
       if (actualArr === null) {
@@ -80,7 +79,6 @@ export default function MovieDetails() {
   }
 
   useEffect(() => {
-    // fetch movie details
     handleFetchMovieById()
   }, [])
   return (

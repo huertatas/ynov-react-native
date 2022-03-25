@@ -3,7 +3,6 @@ import { Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MovieStack from './movieStack'
 import ProfilStack from './profilStack'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Bottom = createBottomTabNavigator()
 

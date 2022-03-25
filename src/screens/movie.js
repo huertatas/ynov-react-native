@@ -47,7 +47,6 @@ export default function Movie({ navigation }) {
   }
 
   useEffect(() => {
-    // fetch films
     handleFetchMovies()
   }, [])
   return (
