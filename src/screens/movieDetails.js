@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import CtaMovieDetails from '../components/ctaMovieDetails'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { showMessage } from 'react-native-flash-message'
+import colors from '../helpers/colors'
 
 export default function MovieDetails() {
   const globalCtx = useContext(GlobalProvider)
@@ -110,7 +111,7 @@ export default function MovieDetails() {
           funcToHandle={handleAddToStorage.bind(null, 'watchlist')}
         />
         <CtaMovieDetails
-          colorsCta='#9ab'
+          colorsCta={colors.textLetterBox}
           ctaText='add to favorite'
           uriIcon='https://www.pngrepo.com/png/53737/180/favorite.png'
           funcToHandle={handleAddToStorage.bind(null, 'favorite')}
@@ -142,7 +143,7 @@ const TopBackground = styled.Image`
 `
 
 const ViewContainer = styled.ScrollView`
-  background: #14181c;
+  background: ${colors.mainColor};
 `
 
 const ContainsInfoDetailTop = styled.View`
@@ -185,7 +186,7 @@ const NormalText = styled.Text`
 
 const Synopsis = styled.Text`
   font-size: 17px;
-  color: #9ab;
+  color: ${colors.text};
   padding: 15px;
 `
 

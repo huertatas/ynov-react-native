@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useIsFocused } from '@react-navigation/native'
 import { showMessage } from 'react-native-flash-message'
 import styled from 'styled-components'
+import colors from '../helpers/colors'
 
 const Login = ({ navigation }) => {
   const globalCtx = useContext(GlobalContext)
@@ -14,7 +15,6 @@ const Login = ({ navigation }) => {
   const isFocused = useIsFocused()
 
   const handleLogin = async () => {
-
     if (!mail && !username) {
       return
     }
@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
 }
 
 const BackgroundMovieScreen = styled.ScrollView`
-  background: #14181c;
+  background: ${colors.mainColor};
 `
 
 const LogoLetterBox = styled.Image`

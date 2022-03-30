@@ -6,6 +6,7 @@ import GlobalContext from '../context/globalContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { showMessage } from 'react-native-flash-message'
 import { useIsFocused } from '@react-navigation/native'
+import colors from '../helpers/colors'
 
 export default function Movie({ navigation }) {
   const globalCtx = useContext(GlobalContext)
@@ -64,7 +65,7 @@ export default function Movie({ navigation }) {
 }
 
 const BackgroundMovieScreen = styled.ScrollView`
-  background: #14181c;
+  background: ${colors.mainColor};
 `
 
 const LogoLetterBox = styled.Image`

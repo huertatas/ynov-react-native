@@ -71,9 +71,7 @@ export default function ListCategory({ arrFilm, deletePossible, titleCtg }) {
           </TouchableHighlight>
           {deletePossible && (
             <DeleteButton
-              onPress={() =>
-                handleDeleteMovieFromProfil.bind(null, item.id, titleCtg)()
-              }
+              onPress={() => handleDeleteMovieFromProfil(item.id, titleCtg)}
               title='delete'
             />
           )}

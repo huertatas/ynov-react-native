@@ -5,6 +5,7 @@ import CategoryMovieSlide from '../components/categoryMovieSlide'
 import GlobalContext from '../context/globalContext'
 import axios from 'axios'
 import { showMessage } from 'react-native-flash-message'
+import colors from '../helpers/colors'
 
 export default function Movie({ navigation }) {
   const globalCtx = useContext(GlobalContext)
@@ -74,7 +75,7 @@ export default function Movie({ navigation }) {
 }
 
 const BackgroundMovieScreen = styled.ScrollView`
-  background: #14181c;
+  background: ${colors.mainColor};
 `
 
 const LogoLetterBox = styled.Image`
